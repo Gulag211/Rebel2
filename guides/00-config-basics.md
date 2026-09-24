@@ -73,3 +73,13 @@ rotation_distance: 40
 ```
 
 Proto není rozdíl mezi X=32 a Y=40 v této konfiguraci překlep. Osy používají rozdílné řemenice. Před kopírováním konfigurace vždy ověř počet zubů řemenice na vlastní tiskárně.
+
+
+## Osa X a extruder – úpravy z Prusa i3 MK3
+
+Osa X tohoto Rebela vychází z konfigurace **Prusa i3 MK3**. Proto je na X použita GT2 řemenice **16T** a `rotation_distance: 32`; nejde o náhodnou odlišnost proti běžným 20T / 40 mm.
+
+Na ose X je zároveň použit **extruder Prusa i3 MK3 R6**, který jsem upravil pro **hotend z Bambu Lab P1**. Výsledné řešení používám jako high-flow variantu.
+
+> [!NOTE]
+> Označení high-flow zde popisuje upravenou konstrukci a její vyšší průtokovou rezervu. Maximální volumetrický průtok v mm³/s není vhodné kopírovat jako univerzální číslo – je potřeba jej změřit pro konkrétní filament, teplotu a trysku.
