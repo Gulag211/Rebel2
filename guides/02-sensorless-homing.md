@@ -60,7 +60,7 @@ Klipper doporučuje jako rozumný výchozí bod homing speed přibližně odpov�
 homing_speed ≈ rotation_distance / 2
 ```
 
-Na tomto Rebelu je aktuálně X `rotation_distance: 32` a Y `rotation_distance: 40`, ale provozní `homing_speed: 50` je výrazně vyšší. **Neměním ji automaticky**, protože hodnoty StallGuardu byly laděné na konkrétním stroji. Pokud budeš sensorless homing znovu kalibrovat, začni současnou metodikou Klipperu a nalaď rychlost, proud a SGTHRS společně.
+Na tomto Rebelu je X `rotation_distance: 32`, protože používá GT2 řemenici 16T (16 × 2 mm = 32 mm). Běžná GT2 řemenice 20T má `rotation_distance: 40`. Osa Y zde používá právě hodnotu 40. Provozní `homing_speed: 50` je ale proti konzervativnímu výchozímu bodu pro ladění výrazně vyšší. **Neměním ji automaticky**, protože hodnoty StallGuardu byly laděné na konkrétním stroji. Pokud budeš sensorless homing znovu kalibrovat, začni současnou metodikou Klipperu a nalaď rychlost, proud a SGTHRS společně.
 
 Po každém sensorless home je vhodné odjet několik milimetrů od dorazu a před dalším sensorless homingem nechat driver alespoň přibližně 2 sekundy v klidu, aby se vyčistil stall flag.
 
