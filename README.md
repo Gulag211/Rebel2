@@ -41,7 +41,7 @@ Aktuální konfigurace v repozitáři používá mimo jiné:
 - sensorless homing os X a Y,
 - filament senzor,
 - ADXL345 a Input Shaper,
-- KAMP,
+- nativní Adaptive Bed Mesh Klipperu (historicky také KAMP),
 - 12864 displej,
 - NeoPixel LED,
 - samostatně řízené ventilátory,
@@ -89,7 +89,7 @@ Rebel2/
 ├── macros.cfg
 ├── mainsail.cfg
 ├── moonraker.conf
-├── KAMP_Settings.cfg
+├── KAMP_Settings.cfg   # legacy/reference – není nutný pro nativní adaptive mesh
 ├── KlipperScreen.conf
 ├── crowsnest.conf
 ├── sonar.conf
@@ -106,7 +106,7 @@ Doplňková makra používaná tiskárnou.
 
 ### `KAMP_Settings.cfg`
 
-Konfigurace KAMP pro adaptivní funkce kolem oblasti tisku.
+Původní konfigurace KAMP ponechaná jako legacy/reference. Pro nativní Adaptive Bed Mesh už není tento soubor povinný.
 
 ### Ostatní soubory
 
@@ -119,10 +119,8 @@ Doplňkové služby a makra nestačí pouze nainstalovat nebo uložit vedle konf
 V této konfiguraci jsou například:
 
 ```ini
-[gcode_macro BED_MESH_CALIBRATE]
 [include macros.cfg]
 [include mainsail.cfg]
-[include KAMP_Settings.cfg]
 [exclude_object]
 ```
 
@@ -159,7 +157,7 @@ Pressure Advance
         ↓
 ADXL345 + Input Shaper
         ↓
-KAMP
+nativní Adaptive Bed Mesh
         ↓
 PRINT_START / PRINT_END
         ↓
@@ -242,7 +240,7 @@ Výuková část je rozdělena do samostatných kapitol. Doporučuji jít postup
 | 07 | [Bed Mesh](guides/07-bed-mesh.md) | bezpečná měřicí oblast |
 | 08 | [Pressure Advance](guides/08-pressure-advance.md) | princip a podmínky kalibrace |
 | 09 | [ADXL345 + Input Shaper](guides/09-input-shaper-adxl345.md) | rezonance a vlastní měření |
-| 10 | [KAMP](guides/10-kamp.md) | adaptivní mesh, include, purge |
+| 10 | [Adaptive Bed Mesh](guides/10-kamp.md) | nativní adaptivní mesh Klipperu + historie KAMP |
 | 11 | [PRINT_START / PRINT_END](guides/11-print-start-end.md) | makra a komunikace se slicerem |
 | 12 | [První tisk a rychlost](guides/12-first-print-speed.md) | bezpečné zvyšování výkonu |
 
