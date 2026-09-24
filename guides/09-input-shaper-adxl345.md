@@ -15,7 +15,7 @@ probe_points:
     110, 100, 20
 ```
 
-Aktuálně uložený Input Shaper:
+Aktuálně uložené hodnoty tohoto konkrétního stroje jsou:
 
 ```ini
 [input_shaper]
@@ -25,26 +25,70 @@ shaper_freq_y: 52
 shaper_type_y: ei
 ```
 
-Tyto frekvence jsou měření mého stroje. **Nekopíruj je.**
+Tyto hodnoty **nekopíruj na jinou tiskárnu**.
 
 ## Kontrola akcelerometru
 
-Nejdřív:
+Nejdřív ověř komunikaci:
 
 ```text
 ACCELEROMETER_QUERY
 ```
 
-Potom lze provést měření rezonancí:
+a potom šum:
+
+```text
+MEASURE_AXES_NOISE
+```
+
+Extrémně vysoký šum může ukazovat na problém se senzorem, napájením, připojením nebo mechanickými vibracemi.
+
+## Současný jednoduchý postup
+
+Klipper umí automatickou kalibraci přímo:
 
 ```text
 SHAPER_CALIBRATE
 ```
 
-Při měření se tiskárna výrazně rozkmitá. Zkontroluj dotažení mechaniky, kabeláž a pevné uchycení akcelerometru.
+Případně pouze jednu osu:
 
-Po změně hmotnosti toolheadu, napnutí řemenů nebo významné mechanické úpravě měření zopakuj.
+```text
+SHAPER_CALIBRATE AXIS=X
+SHAPER_CALIBRATE AXIS=Y
+```
 
-Input Shaper neodstraňuje mechanické problémy. Nejdřív oprav vůle, špatná ložiska nebo řemeny.
+Výsledek neposuzuj jen podle doporučené frekvence. Klipper vypisuje také očekávané zbývající vibrace, smoothing a doporučený limit akcelerace.
 
-➡️ **10 – KAMP**
+Po kalibraci lze hodnoty uložit pomocí:
+
+```text
+SAVE_CONFIG
+```
+
+## TEST_RESONANCES
+
+Pro podrobnější diagnostiku lze použít:
+
+```text
+TEST_RESONANCES AXIS=X
+TEST_RESONANCES AXIS=Y
+```
+
+Měření vytváří výrazné vibrace. První test vždy sleduj a buď připraven použít `M112`.
+
+> [!WARNING]
+> Automatická kalibrace není něco, co má smysl spouštět před každým tiskem. Klipper výslovně upozorňuje, že dlouhodobé opakované buzení rezonancí zvyšuje mechanické namáhání tiskárny.
+
+## Kdy měřit znovu
+
+Měření zopakuj po změně:
+- hmotnosti toolheadu,
+- napnutí řemenů,
+- významné části mechaniky,
+- uchycení akcelerometru,
+- nebo pokud se charakter rezonancí viditelně změnil.
+
+Input Shaper neopravuje vůle, špatná ložiska ani povolené šrouby. Mechanika musí být nejdřív v pořádku.
+
+➡️ **10 – Adaptive Bed Mesh**
