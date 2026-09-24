@@ -10,6 +10,12 @@ Cílem repozitáře není vydávat tuto konfiguraci za původní dokumentaci pro
 > [!WARNING]
 > Rebel 2 je stavebnice / open-source konstrukce, u které se jednotlivé stroje mohou výrazně lišit použitou elektronikou, motory, extruderem, hotendem, sondou i mechanickými úpravami. Hodnoty v tomto repozitáři proto **nepovažuj za univerzální konfiguraci pro každý Rebel 2**.
 
+## Specifické úpravy tohoto Rebela
+
+Tento Rebel 2 není mechanicky úplně sériová stavba. **Osa X vychází z konfigurace Prusa i3 MK3**, proto používá GT2 řemenici **16T** a v Klipperu má `rotation_distance: 32`.
+
+Na ose X je použit také **extruder Prusa i3 MK3 ve verzi R6**, který jsem upravil pro použití **hotendu z Bambu Lab P1**. Tato kombinace dává hotendu vyšší průtokovou rezervu (high-flow) než původní řešení. Konkrétní dosažitelný volumetrický průtok ale závisí na materiálu, teplotě, trysce a konkrétním kusu, proto zde není uváděna univerzální hodnota mm³/s.
+
 ## 📖 NEJDŘÍV README, POTOM CONFIG
 
 Nejrychlejší cesta k funkční tiskárně není začít kopírováním souborů.
