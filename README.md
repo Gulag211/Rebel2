@@ -226,21 +226,32 @@ Po každé významné mechanické změně proto znovu ověř:
 - kalibraci extruderu,
 - případně rezonance a Input Shaper.
 
-## 🎓 Kam bude repozitář směřovat
+## 📚 Český návod krok za krokem
 
-Tento repozitář chci postupně pojmout stejně jako **Ender3-Klipper-Guide**: ne jako skladiště mých konfiguračních souborů, ale jako český výukový projekt.
+Výuková část je rozdělena do samostatných kapitol. Doporučuji jít postupně:
 
-Postupně je vhodné oddělit:
+| Krok | Návod | Co řeší |
+|---|---|---|
+| 00 | [Základy configu](guides/00-config-basics.md) | piny, `!`, `^`, mechanické limity |
+| 01 | [První spuštění](guides/01-first-start.md) | MCU, teploty, BLTouch a motory |
+| 02 | [Sensorless homing](guides/02-sensorless-homing.md) | TMC2209, StallGuard, X/Y |
+| 03 | [BLTouch](guides/03-bltouch.md) | sonda a bezpečný první Z-home |
+| 04 | [PID tuning](guides/04-pid-tuning.md) | hotend a vyhřívaná podložka |
+| 05 | [Kalibrace extruderu](guides/05-extruder-calibration.md) | `rotation_distance` a základ PA |
+| 06 | [Z-offset](guides/06-z-offset.md) | `PROBE_CALIBRATE`, `TESTZ` |
+| 07 | [Bed Mesh](guides/07-bed-mesh.md) | bezpečná měřicí oblast |
+| 08 | [Pressure Advance](guides/08-pressure-advance.md) | princip a podmínky kalibrace |
+| 09 | [ADXL345 + Input Shaper](guides/09-input-shaper-adxl345.md) | rezonance a vlastní měření |
+| 10 | [KAMP](guides/10-kamp.md) | adaptivní mesh, include, purge |
+| 11 | [PRINT_START / PRINT_END](guides/11-print-start-end.md) | makra a komunikace se slicerem |
+| 12 | [První tisk a rychlost](guides/12-first-print-speed.md) | bezpečné zvyšování výkonu |
 
 ```text
-config/    → základní konfigurační soubory
-guides/    → české návody krok za krokem
-optional/  → volitelné funkce a rozšíření
+README → 00 → 01 → 02 → 03 → ... → 12
 ```
 
-Výuková část by měla pokrýt zejména první spuštění, kontrolu pinů a směrů, sensorless homing, BLTouch, PID, extruder, Z-offset, Bed Mesh, Pressure Advance, ADXL345/Input Shaper, KAMP a start/end makra.
-
-Do té doby ber současné soubory především jako **dokumentaci mé konkrétní funkční konfigurace**.
+> [!TIP]
+> Config ukazuje **jak je nastavený můj stroj**. Kapitoly v `guides/` vysvětlují **proč dané nastavení existuje a co musíš ověřit na svém stroji**.
 
 ## 🔗 Související projekt
 
