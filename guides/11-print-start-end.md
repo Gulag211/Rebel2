@@ -1,19 +1,19 @@
 # 11 – PRINT_START, PRINT_END a slicer
 
-Hlavní logiku startu a konce tisku je praktické držet v Klipperu. Slicer pak pouze předá teploty a zavolá makro.
+Hlavní logiku startu a konce tisku držíme v Klipperu. Slicer předá požadované teploty a zavolá makro.
 
 ## PRINT_START na mém Rebelu
 
-Makro:
+Aktuální postup:
+
 1. převezme `BED` a `EXTRUDER`,
 2. začne zahřívat bed,
-3. drží hotend na 150 °C pro přípravu,
-4. čeká na bed,
+3. drží hotend na 150 °C během přípravy,
+4. počká na bed a přípravnou teplotu hotendu,
 5. provede `G28`,
-6. připraví KAMP,
-7. smaže starý mesh a vytvoří nový,
-8. nahřeje hotend na cílovou teplotu,
-9. spustí `LINE_PURGE`.
+6. smaže starý mesh,
+7. vytvoří **nativní adaptivní mesh Klipperu**,
+8. nahřeje hotend na tiskovou teplotu.
 
 Důležitá část:
 
@@ -25,34 +25,53 @@ M104 S150
 M140 S{BED_TEMP}
 M190 S{BED_TEMP}
 M109 S150
+
 G90
 M83
 G28
-SMART_PARK
-SETUP_KAMP_MESHING DISPLAY_PARAMETERS=-1 LCD_ENABLE=-1 FUZZ_ENABLE=-1
+
 BED_MESH_CLEAR
-BED_MESH_CALIBRATE
+BED_MESH_CALIBRATE ADAPTIVE=1
+
 M104 S{EXTRUDER_TEMP}
 TEMPERATURE_WAIT SENSOR=extruder MINIMUM={EXTRUDER_TEMP}
 G92 E0
-LINE_PURGE
 ```
 
-Slicer musí předat oba parametry, například výsledným příkazem ve stylu:
+Oproti starší verzi už start tisku nepotřebuje KAMP makra `SMART_PARK`, `SETUP_KAMP_MESHING` ani KAMP přepsání `BED_MESH_CALIBRATE`.
+
+## Purge
+
+Původní konfigurace používala KAMP `LINE_PURGE`. Po odstranění KAMP jako povinné závislosti jej `PRINT_START` automaticky nevolá.
+
+Purge lze řešit:
+- start G-code sliceru,
+- vlastním jednoduchým Klipper makrem,
+- nebo volitelným KAMP purge, pokud jej chce uživatel zachovat.
+
+Důležité je mít purge pouze na jednom místě.
+
+## Parametry ze sliceru
+
+Slicer musí předat oba parametry, například výsledným příkazem:
 
 ```text
 PRINT_START BED=60 EXTRUDER=210
 ```
 
-Konkrétní proměnné sliceru se liší podle programu.
+Konkrétní názvy proměnných pro teploty se liší podle sliceru.
 
 ## PRINT_END
 
-Současné makro vypne topení, zvedne Z, zaparkuje hlavu, provede retrakci, vypne ventilátor a motory a smaže aktivní mesh.
+Aktuální `PRINT_END`:
+- počká na dokončení pohybů,
+- vypne topení a ofuk,
+- provede malou retrakci,
+- bezpečně zvedne Z pouze do povoleného maxima,
+- zaparkuje na X0 Y200,
+- vymaže mesh,
+- až nakonec vypne motory.
 
-> [!WARNING]
-> Parkovací souřadnice i Z-zvednutí musí odpovídat mechanickým limitům. U vysokého výtisku může slepé `G1 Z10` překročit maximum Z. To je vhodné před dalším rozšiřováním repozitáře upravit na podmíněný bezpečný zdvih.
-
-Nedělej stejnou operaci současně ve sliceru i v makru. Dvojitý homing, purge nebo čekání na teplotu jen komplikuje diagnostiku.
+Parkovací souřadnice patří konkrétnímu stroji a na jiné tiskárně je nutné je přizpůsobit.
 
 ➡️ **12 – První tisk a rychlost**
