@@ -7,13 +7,15 @@ Aktuální provozní config mého Rebela obsahuje:
 kinematics: cartesian
 max_velocity: 400
 max_accel: 6000
-max_accel_to_decel: 6000
+minimum_cruise_ratio: 0.5
 max_z_velocity: 30
 max_z_accel: 200
 ```
 
 > [!WARNING]
 > To jsou limity mé konkrétní upravené tiskárny. **Nejsou to doporučené startovní hodnoty pro jiný Rebel 2.**
+
+`minimum_cruise_ratio` je současná náhrada za staré `max_accel_to_decel`. Starý parametr i `ACCEL_TO_DECEL` v příkazu `SET_VELOCITY_LIMIT` byly z Klipperu odstraněny/deprecated, proto je v tomto repozitáři už nepoužíváme.
 
 ## První tisk
 
