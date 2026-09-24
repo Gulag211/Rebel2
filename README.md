@@ -16,6 +16,14 @@ Tento Rebel 2 není mechanicky úplně sériová stavba. **Osa X vychází z kon
 
 Na ose X je použit také **extruder Prusa i3 MK3 ve verzi R6**, který jsem upravil pro použití **hotendu z Bambu Lab P1**. Tato kombinace dává hotendu vyšší průtokovou rezervu (high-flow) než původní řešení. Konkrétní dosažitelný volumetrický průtok ale závisí na materiálu, teplotě, trysce a konkrétním kusu, proto zde není uváděna univerzální hodnota mm³/s.
 
+### Vyhřívaná podložka a tisková plocha
+
+Původní konstrukce Rebel 2 počítá s vyhřívanou podložkou přibližně **220 × 220 mm**. U této konkrétní stavby se podařilo osadit větší **hotbed 235 × 235 mm z Enderu 3**, takže mechanické rozměry a využitelná tisková plocha se liší od standardního Rebela.
+
+> [!WARNING]
+> Hodnoty souřadnic v tomto repozitáři proto **nelze bez kontroly kopírovat do standardního Rebela s hotbedem 220 × 220 mm**. Při použití konfigurace na původní konstrukci je nutné podle skutečné mechaniky upravit zejména limity os X/Y, bezpečné souřadnice homingu, rozsah `bed_mesh`, parkovací pozice a všechny další makra používající konkrétní X/Y souřadnice. Vždy je potřeba ověřit skutečný dosažitelný rozsah tiskárny a polohu sondy vůči podložce.
+
+
 ## 📖 NEJDŘÍV README, POTOM CONFIG
 
 Nejrychlejší cesta k funkční tiskárně není začít kopírováním souborů.
