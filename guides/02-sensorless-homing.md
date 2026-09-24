@@ -50,6 +50,23 @@ SET_TMC_FIELD STEPPER=stepper_y FIELD=SGTHRS VALUE=100
 
 Testuj opakovaně z různých míst osy. Sensorless homing nerozezná skutečný konec osy od jiné mechanické překážky.
 
+## Co doporučuje současný Klipper
+
+Sensorless homing je citlivý nejen na `driver_sgthrs`, ale také na rychlost homingu, proud motoru, mechanické zatížení a teplotu motoru.
+
+Klipper doporučuje jako rozumný výchozí bod homing speed přibližně odpovídající jedné otáčce motoru za dvě sekundy, tedy zhruba:
+
+```text
+homing_speed ≈ rotation_distance / 2
+```
+
+Na tomto Rebelu je aktuálně X `rotation_distance: 32` a Y `rotation_distance: 40`, ale provozní `homing_speed: 50` je výrazně vyšší. **Neměním ji automaticky**, protože hodnoty StallGuardu byly laděné na konkrétním stroji. Pokud budeš sensorless homing znovu kalibrovat, začni současnou metodikou Klipperu a nalaď rychlost, proud a SGTHRS společně.
+
+Po každém sensorless home je vhodné odjet několik milimetrů od dorazu a před dalším sensorless homingem nechat driver alespoň přibližně 2 sekundy v klidu, aby se vyčistil stall flag.
+
+> [!NOTE]
+> `homing_retract_dist: 0` už zde máme správně. Klipper druhý homing pohyb u sensorless homingu nedoporučuje.
+
 > [!CAUTION]
 > První pokusy dělej u tiskárny s možností okamžitě vypnout napájení.
 
