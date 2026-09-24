@@ -44,3 +44,32 @@ Po změně toolheadu, hotendu, sondy nebo jiné mechaniky znovu ověř:
 Nejdřív pochop konkrétní část configu, potom ji přenes na svůj stroj a otestuj. Zvlášť opatrně pracuj s piny topení, termistory, směry motorů a endstopy.
 
 Další krok: **01 – První spuštění a bezpečná kontrola**.
+
+
+## Poznámka k rotation_distance osy X
+
+Na tomto Rebelu je na ose X použita **GT2 řemenice 16T**, proto je:
+
+```ini
+rotation_distance: 32
+```
+
+GT2 má rozteč zubů 2 mm, takže jedna otáčka 16zubé řemenice posune řemen o:
+
+```text
+16 × 2 mm = 32 mm
+```
+
+U běžnější **GT2 řemenice 20T** vychází:
+
+```text
+20 × 2 mm = 40 mm
+```
+
+a tedy typicky:
+
+```ini
+rotation_distance: 40
+```
+
+Proto není rozdíl mezi X=32 a Y=40 v této konfiguraci překlep. Osy používají rozdílné řemenice. Před kopírováním konfigurace vždy ověř počet zubů řemenice na vlastní tiskárně.
